@@ -5,7 +5,7 @@
       <br><br>
       <div class="row">
         <div class="setBtn col-md-4 offset-md-0 border-end">
-          <h4 class="text-start">1.上传图片</h4>
+          <h4 class="text-start">1. 上传图片</h4>
           <br>
           <div class="alert-box-item">
             <div class="bigImg-div" @click="toGetImg">
@@ -13,8 +13,27 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 offset-md-0">
-          <h4 class="">2.数字识别为:{{ recognizedNum }}</h4>
+        <div class="col-md-6 offset-md-0">
+          <h4 class="">2. 数字识别为:{{ recognizedNum }}</h4>
+
+          <table class="table table-sm table-bordered text-center">
+            <thead>
+              <tr>
+                <th scope="col">标签</th>
+                <th scope="col">预测概率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 使用 v-for 指令来遍历 probabilities 数组 -->
+              <tr v-for="(prob, index) in probabilities" :key="index">
+                <!-- 使用 index 作为标签 -->
+                <th scope="row">{{ index }}</th>
+                <!-- 使用 prob 作为预测概率 -->
+                <td>{{ prob }}%</td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
       </div>
       <br>
@@ -30,6 +49,7 @@
 			return {
 				valueUrl: '',
         recognizedNum:null,
+        probabilities:[],
 			}
 		},
 		methods: {
@@ -77,6 +97,7 @@
                 // 处理后端返回的结果
                 console.log(response.data.message);
                 that.recognizedNum = response.data.message;
+                that.probabilities = response.data.probabilities;
               })
               .catch(error => {
                 console.error('Error uploading image:', error);
