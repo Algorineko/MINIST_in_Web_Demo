@@ -6,7 +6,7 @@
     </div>
     <!-- 导航栏 -->
     <div class="model_nav col-md-2 offset-md-0 border-end">
-      <ul class="nav flex-column">
+      <ul class="model_list nav flex-column">
         <li class="nav-item nav_title shadow">
           <a class="nav-link text-center nav_header">模型列表</a>
         </li>
@@ -14,10 +14,23 @@
           <a class="nav-link active" aria-current="page" href="#/minist">MINIST</a>
         </li>
         <li class="nav-item shadow-sm">
-          <a class="nav-link disabled" href="#">Model_2</a>
+          <a class="nav-link" href="#" @click="CV_toggle"><b>计算机视觉</b></a>
         </li>
+        <template v-for="(model,index) in CV_arr">
+          <li class="nav-item shadow-sm" v-if="CV_isopen" :key="index">
+            <a class="nav-link" :href="'#/' + model.href"><i>{{ model.name }}</i></a>
+          </li>
+        </template>
         <li class="nav-item shadow-sm">
-          <a class="nav-link disabled" href="#">Model_3</a>
+          <a class="nav-link" href="#" @click="NLP_toggle"><b>自然语言处理</b></a>
+        </li>
+        <template v-for="(model,index) in NLP_arr">
+          <li class="nav-item shadow-sm" v-if="NLP_isopen" :key="index">
+            <a class="nav-link" :href="'#/' + model.href"><i>{{ model.name }}</i></a>
+          </li>
+        </template>
+        <li class="nav-item shadow-sm">
+          <a class="nav-link disabled" href="#"><b>其他</b></a>
         </li>
       </ul>
     </div>
@@ -29,6 +42,134 @@
 </template>
 
 <script>
+  export default{
+    data(){
+      return{
+        CV_isopen:true,
+        CV_arr:[
+          {
+            index: 1,
+            name:"MINIST",
+            href:"minist",
+          },
+          {
+            index: 2,
+            name:"CV_2",
+            href:"cv2",
+          },
+          {
+            index: 3,
+            name:"CV_3",
+            href:"cv3",
+          },
+        ],
+        NLP_isopen:true,
+        NLP_arr:[
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+          {
+            index: 1,
+            name:"NLP_1",
+            href:"nlp1",
+          },
+          {
+            index: 2,
+            name:"NLP_2",
+            href:"nlp2",
+          },
+        ],
+      }
+    },
+    methods:{
+      CV_toggle(){
+        this.CV_isopen=!this.CV_isopen;
+      },
+      NLP_toggle(){
+        this.NLP_isopen=!this.NLP_isopen;
+      },
+    },
+    computed: {
+
+    }
+  }
 </script>
 
 <style>
@@ -57,6 +198,8 @@
 .model_nav{
   background-color: #fff;
   padding: 0px 0px 0px 16px;
+  overflow: auto;
+  height: 600px;
 }
 .nav_title{
   padding: 0%;
