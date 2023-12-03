@@ -10,14 +10,21 @@
         <li class="nav-item nav_title shadow">
           <a class="nav-link text-center nav_header">模型列表</a>
         </li>
+
+        <!-- 第一个model,保留纪念 -->
         <li class="nav-item shadow-sm">
           <a class="nav-link active" aria-current="page" href="#/minist">MINIST</a>
         </li>
+
+        <li class="nav-item shadow-sm">
+          <a class="nav-link active" aria-current="page" href="#/test">TEST</a>
+        </li>
+
         <li class="nav-item shadow-sm">
           <a class="nav-link" href="#" @click="CV_toggle"><b>计算机视觉</b></a>
         </li>
         <template v-for="(model,index) in CV_arr">
-          <li class="nav-item shadow-sm" v-if="CV_isopen" :key="index">
+          <li class="nav-item shadow-sm" v-if="CV_isopen" :key="index+114">
             <a class="nav-link" :href="'#/' + model.href"><i>{{ model.name }}</i></a>
           </li>
         </template>
@@ -25,12 +32,20 @@
           <a class="nav-link" href="#" @click="NLP_toggle"><b>自然语言处理</b></a>
         </li>
         <template v-for="(model,index) in NLP_arr">
-          <li class="nav-item shadow-sm" v-if="NLP_isopen" :key="index">
+          <li class="nav-item shadow-sm" v-if="NLP_isopen" :key="index+233">
             <a class="nav-link" :href="'#/' + model.href"><i>{{ model.name }}</i></a>
           </li>
         </template>
         <li class="nav-item shadow-sm">
-          <a class="nav-link disabled" href="#"><b>其他</b></a>
+          <a class="nav-link" href="#" @click="Others_toggle"><b>其他</b></a>
+        </li>
+        <template v-for="(model,index) in Others_arr">
+          <li class="nav-item shadow-sm" v-if="Others_isopen" :key="index+514">
+            <a class="nav-link" :href="'#/' + model.href"><i>{{ model.name }}</i></a>
+          </li>
+        </template>
+        <li class="nav-item shadow-sm">
+          <a class="nav-link disabled" href="#"><b>未开放</b></a>
         </li>
       </ul>
     </div>
@@ -75,87 +90,15 @@
             name:"NLP_2",
             href:"nlp2",
           },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
-          {
-            index: 1,
-            name:"NLP_1",
-            href:"nlp1",
-          },
-          {
-            index: 2,
-            name:"NLP_2",
-            href:"nlp2",
-          },
         ],
+        Others_isopen:true,
+        Others_arr:[
+          {
+            index: 1,
+            name:"IRI",
+            href:"iri",
+          },
+        ]
       }
     },
     methods:{
@@ -164,6 +107,9 @@
       },
       NLP_toggle(){
         this.NLP_isopen=!this.NLP_isopen;
+      },
+      Others_toggle(){
+        this.Others_isopen=!this.Others_isopen;
       },
     },
     computed: {

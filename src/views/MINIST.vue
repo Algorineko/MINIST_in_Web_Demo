@@ -24,7 +24,7 @@
               </thead>
               <tbody>
                 <!-- 使用 v-for 指令来遍历 probabilities 数组 -->
-                <tr v-for="(prob, index) in probabilities" :key="index">
+                <tr v-for="(prob, index) in probabilities" :key="index+114514">
                   <!-- 使用 index 作为标签 -->
                   <th scope="row">{{ index }}</th>
                   <!-- 使用 prob 作为预测概率 -->
@@ -36,7 +36,7 @@
       </div>
       <br>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
