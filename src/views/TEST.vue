@@ -2,12 +2,9 @@
   <div class="row">
     <div class="mainpart col-md-10 offset-md-1">
       <h1 class="text-start">测试</h1>
-      <br><br>
       <h2>echarts test</h2>
     </div>
-    <div>
-      <div id="ct1" style="width: 600px; height: 400px"></div>
-    </div>
+    <div id="ct1" style="width: 800px; height: 800px"></div>
   </div>
 </template>
 
@@ -17,57 +14,49 @@ export default {
     this.drawChart();
   },
   methods: {
+    makeGaussian(amplitude, x0, y0, sigmaX, sigmaY) {
+      return function (amplitude, x0, y0, sigmaX, sigmaY, x, y) {
+        let exponent = -(
+          (Math.pow(x - x0, 2) / (2 * Math.pow(sigmaX, 2))) +
+          (Math.pow(y - y0, 2) / (2 * Math.pow(sigmaY, 2)))
+        );
+        return amplitude * Math.pow(Math.E, exponent);
+      }.bind(null, amplitude, x0, y0, sigmaX, sigmaY);
+    },
+    generateGaussianData() {
+      const gaussian = this.makeGaussian(50, 0, 0, 20, 20);
+      let data = [];
+      for (var i = 0; i < 1000; i++) {
+        let x = Math.random() * 100 - 50;
+        let y = Math.random() * 100 - 50;
+        let z = gaussian(x, y);
+        data.push([x, y, z]);
+      }
+      return data;
+    },
     drawChart() {
-      // 基于准备好的dom，初始化echarts实例  这个和上面的id对应
       let myChart = this.$echarts.init(document.getElementById("ct1"));
-      // 指定图表的配置项和数据
       let option = {
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            data: [150, 230, 224, 218, 135, 147, 260],
-            type: 'line'
-          }
-        ]
+        grid3D: {},
+        xAxis3D: {},
+        yAxis3D: {},
+        zAxis3D: {},
+        // series: [{
+        //   type: 'scatter3D',
+        //   symbolSize: 5,
+        //   data: this.generateGaussianData(),
+        // }],
+        series: [{
+          type: 'surface',
+          wireframe: true,  // 显示网格线
+          // shading: 'color', // 使用颜色着色
+          data: this.generateGaussianData(),
+        }],
       };
-      // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
     },
-    // drawChart() {
-    //   // 基于准备好的dom，初始化echarts实例  这个和上面的id对应
-    //   let myChart = this.$echarts.init(document.getElementById("ct1"));
-    //   // 指定图表的配置项和数据
-    //   let option = {
-    //     title: {
-    //       text: "ECharts 入门示例",
-    //     },
-    //     tooltip: {},
-    //     legend: {
-    //       data: ["销量"],
-    //     },
-    //     xAxis: {
-    //       data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-    //     },
-    //     yAxis: {},
-    //     series: [
-    //       {
-    //         name: "销量",
-    //         type: "bar",
-    //         data: [5, 20, 36, 10, 10, 20],
-    //       },
-    //     ],
-    //   };
-    //   // 使用刚指定的配置项和数据显示图表。
-    //   myChart.setOption(option);
-    // },
   },
-}
+};
 </script>
 
 <style>

@@ -3,8 +3,9 @@ import 'bootstrap/dist/js/bootstrap.min.js'; //引用bootstrap的js
 import Vue from 'vue';
 import router from './router/index.js';
 import App from './App.vue';
-// import echarts from 'echarts';
-import * as echarts from 'echarts'
+
+import * as echarts from 'echarts';
+import 'echarts-gl'; 
 Vue.prototype.$echarts = echarts;
 
 Vue.config.productionTip = false
